@@ -1,0 +1,17 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="hstack gap-2">
+        @Html.ActionLink($"Hello {@User.Identity.Name}!", "Index", "Address", new { area = "" }, new { @class = "nav-link text-dark me-2" })
+
+        @if (User.IsInRole("Administrators"))
+        {
+            @Html.ActionLink("Admin Portal", "Index", "Dashboard", new { area = "Admin" }, new { @class = "nav-link text-dark" })
+            <div class="vr"></div>
+        }
+        @Html.ActionLink("Logout", "LogOut", "Authentication", new { area = "" }, new { @class = "nav-link text-dark" })
+    </div>
+}
+else
+{
+    @Html.ActionLink("Log in", "Login", "Authentication", new { area = "" }, new { @class = "nav-link text-dark" })
+}

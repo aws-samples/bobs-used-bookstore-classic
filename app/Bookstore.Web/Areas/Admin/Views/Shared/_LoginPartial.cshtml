@@ -1,0 +1,9 @@
+<span class="navbar-text me-2">
+    Hello @User.Identity.Name!
+</span>
+
+<div class="hstack gap-2">
+    @Html.ActionLink("Customer Portal", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+    <div class="vr"></div>
+    @Html.ActionLink("Logout", "LogOut", "Authentication", new { area = "" }, new { @class = "nav-link" })
+</div>

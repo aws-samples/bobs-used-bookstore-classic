@@ -1,0 +1,42 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                @Html.ActionLink("Bob's Used Books", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("My Orders", "Index", "Orders", new { area = "" }, new { @class = "nav-link text-dark" })
+                        </li>
+                    }
+                    <li class="nav-item">
+                        @Html.ActionLink("Search", "Index", "Search", new { area = "" }, new { @class = "nav-link text-dark" })
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Resell my Books", "Index", "Resale", new { area = "" }, new { @class = "nav-link text-dark" })
+                        </li>
+                    }
+                    <li class="nav-item">
+                        @Html.ActionLink("Wish List", "Index", "Wishlist", new { area = "" }, new { @class = "nav-link text-dark" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart", new { area = "" }, new { @class = "nav-link text-dark" })
+                    </li>
+                </ul>
+            </div>
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+</header>

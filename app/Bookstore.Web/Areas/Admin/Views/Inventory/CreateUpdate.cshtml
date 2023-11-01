@@ -1,0 +1,142 @@
+﻿@using Bookstore.Domain.ReferenceData
+
+@model Bookstore.Web.Areas.Admin.Models.Inventory.InventoryCreateUpdateViewModel
+
+<div class="d-flex m-3">
+    <h5 class="me-auto">Create / Update Book</h5>
+</div>
+
+<form enctype="multipart/form-data" method="post" novalidate>
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div class="mb-3">
+                <label class="form-label" for="NameInput">Name</label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id="NameInput", placeholder ="Book name" })                
+                <small>@Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger"})</small>
+            </div>            
+
+            <div class="mb-3">
+                <label class="form-label" for="AuthorInput">Author</label>
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control", @id = "AuthorInput", placeholder = "Author" })
+                <small>@Html.ValidationMessageFor(x => x.Author, null, new { @class = "text-danger" })</small>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label" for="IsbnInput">ISBN</label>
+                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control", @id = "IsbnInput", placeholder = "ISBN" })
+                <small>@Html.ValidationMessageFor(x => x.ISBN, null, new { @class = "text-danger" })</small>                               
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label class="form-label" for="PriceInput">Price</label>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @id = "PriceInput", placeholder = "Price", step = "0.01", @type = "number" })
+                    <small>@Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })</small>
+                </div>
+
+                <div class="col">
+                    <label class="form-label" for="QuantityInput">Quantity</label>
+                    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @id = "QuantityInput", placeholder = "Quantity", @type = "number" })
+                    <small>@Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="SummaryInput">Summary</label>
+                @Html.TextAreaFor(a => a.Summary, new { @class = "form-control", rows = 4, placeholder = "Summary" })             
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="mb-3">
+                    <label class="form-label" for="PublisherSelect">Publisher</label>
+                    <div class="input-group">
+
+                        @Html.DropDownListFor(a => a.SelectedPublisherId, Model.Publishers, "Select the Publisher", new { @class = "form-select" })
+                        @Html.ActionLink("Add", "Create", new { controller = "ReferenceData", selectedReferenceDataType = ReferenceDataType.Publisher }, new { @class = "btn btn-outline-primary" })                        
+                    </div>
+                    <small>@Html.ValidationMessageFor(m => m.SelectedPublisherId, null, new { @class = "text-danger" }) </small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="GenreSelect">Genre</label>
+                    <div class="input-group">
+                        @Html.DropDownListFor(a => a.SelectedGenreId, Model.Genres, "Select the Genre", new { @class = "form-select" })
+                        @Html.ActionLink("Add", "Create", new { controller = "ReferenceData", selectedReferenceDataType = ReferenceDataType.Genre }, new { @class = "btn btn-outline-primary" })
+                    </div>
+                    <small>@Html.ValidationMessageFor(m => m.SelectedGenreId, null, new { @class = "text-danger" }) </small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="BookTypeSelect">Book Type</label>
+                    <div class="input-group">
+                        @Html.DropDownListFor(a => a.SelectedBookTypeId, Model.BookTypes, "Select the type", new { @class = "form-select" })
+                        @Html.ActionLink("Add", "Create", new { controller = "ReferenceData", selectedReferenceDataType = ReferenceDataType.BookType }, new { @class = "btn btn-outline-primary" })
+                    </div>
+                    <small>@Html.ValidationMessageFor(m => m.SelectedBookTypeId, null, new { @class = "text-danger" }) </small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="ConditionSelect">Condition</label>
+
+
+                    <div class="input-group">
+                        @Html.DropDownListFor(a => a.SelectedConditionId, Model.BookConditions, "Select the condition", new { @class = "form-select" })
+                        @Html.ActionLink("Add", "Create", new { controller = "ReferenceData", selectedReferenceDataType = ReferenceDataType.Condition }, new { @class = "btn btn-outline-primary" })
+                    </div>
+                    <small>@Html.ValidationMessageFor(m => m.SelectedConditionId, null, new { @class = "text-danger" }) </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="mb-3">
+
+                <label class="form-label">Cover Image</label>                               
+                @Html.TextBoxFor(a => a.CoverImage, new { @class = "form-control mb-3", type = "file", accept = ".png,.jpg,.jpeg" })
+                @Html.ValidationMessageFor(a => a.CoverImage, null, new { @class="text=danger" })
+                
+                <img src="@Model.CoverImageUrl" class="img-thumbnail @(string.IsNullOrWhiteSpace(Model.CoverImageUrl) ? "d-none" : "")" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-8 d-grid gap-2 d-md-block">
+            <button class="btn btn-primary" type="submit">Save</button>
+            @Html.ActionLink("Back", "Index", new { controller = "Inventory" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("input:file").change(function () {
+                readUrl(this);
+            });
+        });
+
+        function readUrl(input) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(input)
+                    .next("img")
+                    .attr("src", e.target.result)
+                    .removeClass("d-none");
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+
+    @{Html.RenderPartial("_ValidationScriptsPartial");}
+}

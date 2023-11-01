@@ -1,0 +1,25 @@
+﻿@model Bookstore.Web.ViewModel.PaginatedViewModel
+
+@{
+    var filters = HttpContext.Current.Request.QueryString;
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination mb-0">
+        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+            @Html.ActionLink("Previous", "Index", new { pageIndex = Model.PageIndex - 1 }, new { @class = "page-link" })
+
+        </li>
+
+        @foreach (var button in Model.PaginationButtons)
+        {
+            <li class="page-item @(Model.PageIndex == button ? "disabled" : "")">
+                @Html.ActionLink(button.ToString(), "Index", new { pageIndex = button }, new { @class = "page-link" })
+            </li>
+        }
+
+        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+            @Html.ActionLink("Next", "Index", new { pageIndex = Model.PageIndex + 1 }, new { @class = "page-link" })
+        </li>
+    </ul>
+</nav>

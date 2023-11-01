@@ -1,0 +1,34 @@
+﻿<header>
+    <nav class="navbar navbar-expand-lg bg-light mb-3">
+        <div class="container-fluid">
+            @Html.ActionLink("Bob's Used Books", "Index", "Dashboard", new { area = "Admin" }, new { @class = "navbar-brand" })
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        @Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "Admin" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Orders", "Index", "Orders", new { area = "Admin" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Offers", "Index", "Offers", new { area = "Admin" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Inventory", "Index", "Inventory", new { area = "Admin" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Reference Data", "Index", "ReferenceData", new { area = "Admin" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </div>
+            
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+</header>

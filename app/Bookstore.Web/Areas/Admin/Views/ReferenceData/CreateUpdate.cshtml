@@ -1,0 +1,29 @@
+﻿@using Bookstore.Domain.ReferenceData
+@using Bookstore.Web.Helpers
+
+@model Bookstore.Web.Areas.Admin.Models.ReferenceData.ReferenceDataItemCreateUpdateViewModel
+
+<div asp-validation-summary="All"></div>
+
+<div class="d-flex m-3">
+    <h5 class="me-auto">Create / Update Reference Data</h5>
+</div>
+
+<form class="row justify-content-center" method="post">
+    @Html.HiddenFor(m => m.Id) 
+
+    <div class="col-4">
+        <div class="mb-3">
+            <label for="referenceDataTypeSelect" class="form-label">Reference data type</label>
+            @Html.DropDownListFor(a => a.SelectedReferenceDataType, Html.GetSelectListForEnum<ReferenceDataType>(), null, new { @class = "form-select" })
+        </div>
+
+        <div class="mb-3">
+            <label for="referenceDataTextInput" class="form-label">Text</label>
+            @Html.TextBoxFor(a => a.Text, new { type="text", @class = "form-control", required="rquired", id = "referenceDataTextInput" })
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+        @Html.ActionLink("Back", "Index", new { controller = "ReferenceData" }, new { @class = "btn btn-secondary" })
+    </div>
+</form>
