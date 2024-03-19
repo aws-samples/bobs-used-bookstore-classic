@@ -50,14 +50,14 @@ public class DatabaseStack : Stack
             // fits inside the free tier for new accounts
             Engine = DatabaseInstanceEngine.SqlServerEx(new SqlServerExInstanceEngineProps
             {
-                Version = SqlServerEngineVersion.VER_14
+                Version = SqlServerEngineVersion.VER_15
             }),
             Port = DatabasePort,
             SecurityGroups = new[]
             {
                 securityGroup
             },
-            InstanceType = InstanceType.Of(InstanceClass.BURSTABLE2, InstanceSize.MICRO),
+            InstanceType = InstanceType.Of(InstanceClass.BURSTABLE3, InstanceSize.SMALL),
 
             InstanceIdentifier = $"{Constants.AppName}Database",
 
