@@ -9,8 +9,6 @@ RUN msbuild app/Bookstore.Web/Bookstore.Web.csproj /p:DeployOnBuild=true /p:Publ
 
 FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019 AS runtime
 
-SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
-
 WORKDIR /LogMonitor
 RUN Invoke-WebRequest -Uri "https://github.com/microsoft/windows-container-tools/releases/download/v2.0.2/LogMonitor.exe" -OutFile "LogMonitor.exe"
 COPY LogMonitorConfig.json .
