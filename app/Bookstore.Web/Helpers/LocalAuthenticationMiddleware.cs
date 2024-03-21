@@ -51,7 +51,7 @@ namespace Bookstore.Web.Helpers
             var identity = new ClaimsIdentity("Application");
 
             identity.AddClaim(new Claim(ClaimTypes.Name, "bookstoreuser"));
-            identity.AddClaim(new Claim("sub", UserId));
+            identity.AddClaim(new Claim("nameidentifier", UserId));
             identity.AddClaim(new Claim("given_name", "Bookstore"));
             identity.AddClaim(new Claim("family_name", "User"));
             identity.AddClaim(new Claim(ClaimTypes.Role, "Administrators"));
@@ -64,7 +64,7 @@ namespace Bookstore.Web.Helpers
             var identity = (ClaimsIdentity)HttpContext.Current.User.Identity;
 
             var dto = new CreateOrUpdateCustomerDto(
-                identity.FindFirst("Sub").Value,
+                identity.FindFirst("nameidentifier").Value,
                 identity.Name,
                 identity.FindFirst("given_name").Value,
                 identity.FindFirst("family_name").Value);
