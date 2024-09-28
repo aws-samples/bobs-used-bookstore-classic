@@ -27,8 +27,7 @@ function Update-ConnectionString-WebConfig {
     $webConfigXml.Save($webConfigPathParam)
 }
 
-
 $connectionString = Get-ConnectionString
-$webConfig1 = "..\app\Bookstore.Web\Web2.config"
+$webConfig1 = "..\app\Bookstore.Web\Web.config"
 
 Update-ConnectionString-WebConfig -connectionStringParam $connectionString -webConfigPathParam $webConfig1
