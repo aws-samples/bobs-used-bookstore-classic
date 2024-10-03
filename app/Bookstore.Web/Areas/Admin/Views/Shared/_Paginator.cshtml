@@ -1,8 +1,17 @@
-﻿@model Bookstore.Web.Areas.Admin.Models.PaginatedViewModel
+﻿@*
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+*@
+@model Bookstore.Web.Areas.Admin.Models.PaginatedViewModel
 
 @{
     var filters = HttpContext.Current.Request.QueryString;
 }
+@*
+    @{
+        var filters = HttpContextAccessor.HttpContext.Request.QueryString;
+    }
+*@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination mb-0">

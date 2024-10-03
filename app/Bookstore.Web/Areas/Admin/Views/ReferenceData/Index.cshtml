@@ -10,7 +10,7 @@
 <div class="d-flex m-3">
     <h5 class="me-auto">Reference Data</h5>
 
-    @Html.ActionLink("New Reference Data Item", "Create", new { controller = "ReferenceData" }, new { @class = "btn btn-primary" } )
+    @Html.ActionLink("New Reference Data Item", "Create", new { controller = "ReferenceData" }, new { @class = "btn btn-primary" })
 
 </div>
 
@@ -28,6 +28,12 @@
 
 
             </div>
+            @*
+                            <div class="col-12">
+                    <label class="visually-hidden" for="referenceDataTypeSelect">Reference data type</label>
+                    @Html.DropDownListFor(a => a.Filters.ReferenceDataType, Html.GetEnumSelectList<ReferenceDataType>(), "All Reference Data Types", new { @class = "form-select" })
+                </div>
+            *@
 
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Filter</button>

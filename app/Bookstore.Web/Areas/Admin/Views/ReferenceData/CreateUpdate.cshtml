@@ -10,17 +10,24 @@
 </div>
 
 <form class="row justify-content-center" method="post">
-    @Html.HiddenFor(m => m.Id) 
+    @Html.HiddenFor(m => m.Id)
 
     <div class="col-4">
         <div class="mb-3">
             <label for="referenceDataTypeSelect" class="form-label">Reference data type</label>
             @Html.DropDownListFor(a => a.SelectedReferenceDataType, Html.GetSelectListForEnum<ReferenceDataType>(), null, new { @class = "form-select" })
         </div>
+        @*
+                        <div class="mb-3">
+                <label for="referenceDataTypeSelect" class="form-label">Reference data type</label>
+                @Html.DropDownListFor(a => a.SelectedReferenceDataType, Html.GetEnumSelectList<ReferenceDataType>(), new { @class = "form-select" })
+            </div>
+
+        *@
 
         <div class="mb-3">
             <label for="referenceDataTextInput" class="form-label">Text</label>
-            @Html.TextBoxFor(a => a.Text, new { type="text", @class = "form-control", required="rquired", id = "referenceDataTextInput" })
+            @Html.TextBoxFor(a => a.Text, new { type = "text", @class = "form-control", required = "rquired", id = "referenceDataTextInput" })
         </div>
 
         <button class="btn btn-primary" type="submit">Save</button>

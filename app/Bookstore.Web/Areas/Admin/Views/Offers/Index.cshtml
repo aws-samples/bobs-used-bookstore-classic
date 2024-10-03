@@ -38,6 +38,14 @@
                 <label class="visually-hidden" for="OfferStatusSelect">Offer status</label>
                 @Html.EnumDropDownListFor(a => a.Filters.OfferStatus, "All Offer Statuses", new { @class = "form-select" })
             </div>
+            @*
+                       <div class="col-12">
+                    <label class="visually-hidden" for="OfferStatusSelect">Offer status</label>
+                    <select asp-for="Filters.OfferStatus" asp-items="Html.GetEnumSelectList<YourEnumType>()" class="form-select">
+                        <option value="">All Offer Statuses</option>
+                    </select>
+                </div>
+            *@
 
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Filter</button>
@@ -110,7 +118,7 @@
 
                                 case OfferStatus.Received:
 
-                                    <button type="submit" class="btn btn-link p-0" formaction="@($"/Admin/Offers/PaidAsync/{offer.OfferId}")">Make Payment</button>                                    
+                                    <button type="submit" class="btn btn-link p-0" formaction="@($"/Admin/Offers/PaidAsync/{offer.OfferId}")">Make Payment</button>
 
                                     break;
                             }
