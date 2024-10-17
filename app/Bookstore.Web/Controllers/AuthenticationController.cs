@@ -16,7 +16,7 @@ namespace Bookstore.Web.Controllers
 
         public ActionResult LogOut()
         {
-            return BookstoreConfiguration.Get("Services/Authentication") == "aws" ? CognitoSignOut() : LocalSignOut();
+            return BookstoreConfiguration.GetSetting("Services/Authentication") == "aws" ? CognitoSignOut() : LocalSignOut();
         }
 
         private ActionResult LocalSignOut()
@@ -36,8 +36,8 @@ namespace Bookstore.Web.Controllers
                 Response.Cookies.Add(new HttpCookie(".AspNet.Cookies") { Expires = DateTime.Now.AddDays(-1) });
             }
 
-            var domain = BookstoreConfiguration.Get("Authentication/Cognito/CognitoDomain");
-            var clientId = BookstoreConfiguration.Get("Authentication/Cognito/LocalClientId");
+            var domain = BookstoreConfiguration.GetSetting("Authentication/Cognito/CognitoDomain");
+            var clientId = BookstoreConfiguration.GetSetting("Authentication/Cognito/LocalClientId");
             var logoutUri = $"{Request.Url.Scheme}://{Request.Url.Host}:{Request.Url.Port}/";
 
             return Redirect($"{domain}/logout?client_id={clientId}&logout_uri={logoutUri}");

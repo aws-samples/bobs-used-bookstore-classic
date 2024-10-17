@@ -18,7 +18,7 @@ namespace Bookstore.Web
     {
         public static void ConfigureAuthentication(IAppBuilder app)
         {
-            if (BookstoreConfiguration.Get("Services/Authentication") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/Authentication") == "aws")
             {
                 ConfigureCognitoAuthentication(app);
             }
@@ -41,8 +41,8 @@ namespace Bookstore.Web
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-                ClientId = BookstoreConfiguration.Get("Authentication/Cognito/LocalClientId"),
-                MetadataAddress = BookstoreConfiguration.Get("Authentication/Cognito/MetadataAddress"),
+                ClientId = BookstoreConfiguration.GetSetting("Authentication/Cognito/LocalClientId"),
+                MetadataAddress = BookstoreConfiguration.GetSetting("Authentication/Cognito/MetadataAddress"),
                 ResponseType = OpenIdConnectResponseType.Code,
                 RedeemCode = true,
                 Scope = "openid profile",

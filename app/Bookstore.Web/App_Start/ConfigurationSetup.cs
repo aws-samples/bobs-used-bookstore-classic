@@ -16,18 +16,18 @@ namespace Bookstore.Web
             const string fileServicePath = "/Files";
 
 
-            if (BookstoreConfiguration.Get("Services/Database") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/Database") == "aws")
             {
                 using (var client = new AmazonSimpleSystemsManagementClient())
                 {
                     var request = new GetParameterRequest { Name = $"{rootPath}{databasePath}/ConnectionStrings/BookstoreDatabaseConnection" };
                     var response = client.GetParameter(request);
 
-                    BookstoreConfiguration.Add(response.Parameter.Name.Replace($"{rootPath}{databasePath}/", string.Empty), response.Parameter.Value);
+                    BookstoreConfiguration.AddSetting(response.Parameter.Name.Replace($"{rootPath}{databasePath}/", string.Empty), response.Parameter.Value);
                 }
             }
 
-            if (BookstoreConfiguration.Get("Services/Authentication") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/Authentication") == "aws")
             {
                 using (var client = new AmazonSimpleSystemsManagementClient())
                 {
@@ -36,12 +36,12 @@ namespace Bookstore.Web
 
                     foreach (var parameter in response.Parameters)
                     {
-                        BookstoreConfiguration.Add(parameter.Name.Replace($"{rootPath}/", string.Empty), parameter.Value);
+                        BookstoreConfiguration.AddSetting(parameter.Name.Replace($"{rootPath}/", string.Empty), parameter.Value);
                     }
                 }
             }
 
-            if (BookstoreConfiguration.Get("Services/FileService") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/FileService") == "aws")
             {
                 using (var client = new AmazonSimpleSystemsManagementClient())
                 {
@@ -50,7 +50,7 @@ namespace Bookstore.Web
 
                     foreach (var parameter in response.Parameters)
                     {
-                        BookstoreConfiguration.Add(parameter.Name.Replace($"{rootPath}/", string.Empty), parameter.Value);
+                        BookstoreConfiguration.AddSetting(parameter.Name.Replace($"{rootPath}/", string.Empty), parameter.Value);
                     }
                 }
             }

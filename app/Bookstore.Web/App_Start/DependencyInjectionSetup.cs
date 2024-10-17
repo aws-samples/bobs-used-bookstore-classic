@@ -42,7 +42,7 @@ namespace Bookstore.Web
             builder.RegisterType<ShoppingCartService>().As<IShoppingCartService>();
             builder.RegisterType<ImageResizeService>().As<IImageResizeService>();
 
-            var connectionString = BookstoreConfiguration.Get("ConnectionStrings/BookstoreDatabaseConnection");
+            var connectionString = BookstoreConfiguration.GetConnectionString("BookstoreDatabaseConnection");
             builder.RegisterType<ApplicationDbContext>().WithParameter("connectionString", connectionString).InstancePerRequest();
 
             builder.RegisterType<CustomerRepository>().As<ICustomerRepository>();
@@ -55,7 +55,7 @@ namespace Bookstore.Web
 
             builder.RegisterGeneric(typeof(PaginatedList<>)).As(typeof(IPaginatedList<>)).InstancePerLifetimeScope();
 
-            if (BookstoreConfiguration.Get("Services/FileService") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/FileService") == "aws")
             {
                 builder.RegisterType<AmazonS3Client>().As<IAmazonS3>();
                 builder.RegisterType<S3FileService>().As<IFileService>();
@@ -69,7 +69,7 @@ namespace Bookstore.Web
                 builder.RegisterInstance(new LocalFileService(webRootPath)).As<IFileService>();
             }
 
-            if (BookstoreConfiguration.Get("Services/ImageValidationService") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/ImageValidationService") == "aws")
             {
                 builder.RegisterType<AmazonRekognitionClient>().As<IAmazonRekognition>();
                 builder.RegisterType<RekognitionImageValidationService>().As<IImageValidationService>();
@@ -79,7 +79,7 @@ namespace Bookstore.Web
                 builder.RegisterType<LocalImageValidationService>().As<IImageValidationService>();
             }
 
-            if (BookstoreConfiguration.Get("Services/Authentication") != "aws")
+            if (BookstoreConfiguration.GetSetting("Services/Authentication") != "aws")
             {
                 builder.RegisterType<LocalAuthenticationMiddleware>();
             }

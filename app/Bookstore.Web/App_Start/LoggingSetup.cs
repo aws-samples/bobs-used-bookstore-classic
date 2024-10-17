@@ -15,7 +15,7 @@ namespace Bookstore.Web
 
             Target loggingTarget;
 
-            if (BookstoreConfiguration.Get("Services/LoggingService") == "aws")
+            if (BookstoreConfiguration.GetSetting("Services/LoggingService") == "aws")
             {
                 loggingTarget = new AWSTarget { LogGroup = Constants.AppName };
             }

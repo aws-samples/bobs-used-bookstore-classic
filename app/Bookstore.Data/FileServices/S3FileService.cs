@@ -21,7 +21,7 @@ namespace Bookstore.Data.FileServices
         {
             if (string.IsNullOrWhiteSpace(filePath)) return;
 
-            var bucketName = BookstoreConfiguration.Get("Files/BucketName");
+            var bucketName = BookstoreConfiguration.GetSetting("Files/BucketName");
             var request = new DeleteObjectRequest
             {
                 BucketName = bucketName,
@@ -35,9 +35,9 @@ namespace Bookstore.Data.FileServices
         {
             if (contents == null) return null;
 
-            var bucketName = BookstoreConfiguration.Get("Files/BucketName");
+            var bucketName = BookstoreConfiguration.GetSetting("Files/BucketName");
             var uniqueFilename = $"{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(filename)}";
-            var cloudFrontDomain = BookstoreConfiguration.Get("Files/CloudFrontDomain");
+            var cloudFrontDomain = BookstoreConfiguration.GetSetting("Files/CloudFrontDomain");
 
             var request = new TransferUtilityUploadRequest
             {

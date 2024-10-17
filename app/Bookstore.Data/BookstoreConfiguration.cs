@@ -11,6 +11,7 @@ namespace BobsBookstoreClassic.Data
         private static BookstoreConfiguration Instance => Lazy.Value;
 
         private readonly Dictionary<string, string> _appSettings = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _connectionStrings = new Dictionary<string, string>();
 
         private BookstoreConfiguration()
         {
@@ -23,23 +24,40 @@ namespace BobsBookstoreClassic.Data
                     _appSettings[key] = Environment.GetEnvironmentVariable(key);
                 }
             }
+
+            foreach (ConnectionStringSettings connectionStringSettings in ConfigurationManager.ConnectionStrings)
+            {
+                _connectionStrings[connectionStringSettings.Name] = connectionStringSettings.ConnectionString;
+
+            }
         }
 
-        public static void Add(string key, string value)
+        public static void AddSetting(string key, string value)
         {
             Instance._appSettings[key] = value;
         }
 
-        public static string Get(string key)
+        public static string GetSetting(string key)
         {
             return Instance._appSettings[key];
         }
 
-        public static T Get<T>(string key)
+        public static T GetSetting<T>(string key)
         {
             var value = Instance._appSettings[key];
 
             return (T)Convert.ChangeType(value, typeof(T));
         }
+
+        public static void AddConnectionString(string key, string value)
+        {
+            Instance._connectionStrings[key] = value;
+        }
+
+        public static string GetConnectionString(string key)
+        {
+            return Instance._connectionStrings[key];
+        }
+
     }
 }
