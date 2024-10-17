@@ -20,10 +20,7 @@ function Update-ConnectionString-WebConfig {
     
     $webConfigPathParam = Join-Path $myPath $webConfigPathParam
     $webConfigXml = [xml](Get-Content -Path $webConfigPathParam)
-
-    $addElement = $webConfigXml.configuration.appSettings.add | Where-Object { $_.key -eq "ConnectionStrings/BookstoreDatabaseConnection" }
-    $addElement.value = $connectionStringParam
-
+    $webConfigXml.configuration.connectionStrings.add.connectionString = $connectionStringParam
     $webConfigXml.Save($webConfigPathParam)
 }
 
