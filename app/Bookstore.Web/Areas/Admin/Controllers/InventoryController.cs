@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Bookstore.Web.Areas.Admin.Models.Inventory;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.ReferenceData;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bookstore.Web.Areas.Admin.Controllers
 {

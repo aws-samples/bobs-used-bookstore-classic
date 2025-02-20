@@ -1,14 +1,16 @@
-﻿using Microsoft.Owin;
 using System;
 using System.Drawing;
 using System.Net;
-using System.Web;
+using Microsoft.AspNetCore.Owin;
+
+using Microsoft.AspNetCore.Http;
+
 
 namespace Bookstore.Web.Helpers
 {
     public static class HttpContextExtensions
     {
-        public static string GetShoppingCartCorrelationId(this HttpContextBase context)
+        public static string GetShoppingCartCorrelationId(this HttpContext context)
         {
             var CookieKey = "ShoppingCartId";
 

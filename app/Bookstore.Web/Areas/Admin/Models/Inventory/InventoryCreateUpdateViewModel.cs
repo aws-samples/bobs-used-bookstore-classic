@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.ReferenceData;
 using Bookstore.Web.Helpers;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bookstore.Web.Areas.Admin.Models.Inventory
 {

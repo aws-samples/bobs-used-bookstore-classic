@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Web;
-using System.Web.Mvc;
 using BobsBookstoreClassic.Data;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bookstore.Web.Controllers
 {
