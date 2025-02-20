@@ -1,7 +1,7 @@
 using System;
-using System.Web;
-using BobsBookstoreClassic.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using BobsBookstoreClassic.Data;
 
 
 namespace Bookstore.Web.Controllers
@@ -24,7 +24,10 @@ namespace Bookstore.Web.Controllers
         {
             if (HttpContext.Request.Cookies["LocalAuthentication"] != null)
             {
-                HttpContext.Response.Cookies.Add(new HttpCookie("LocalAuthentication") { Expires = DateTime.Now.AddDays(-1) });
+                HttpContext.Response.Cookies.Delete("LocalAuthentication", new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(-1)
+                });
             }
 
             return RedirectToAction("Index", "Home");
