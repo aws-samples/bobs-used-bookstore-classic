@@ -1,7 +1,6 @@
-﻿using System.IO;
+using System.IO;
 using System.Reflection;
 using System.Web;
-using System.Web.Mvc;
 using Amazon.Rekognition;
 using Amazon.S3;
 using Autofac;
@@ -22,6 +21,8 @@ using Bookstore.Domain.Orders;
 using Bookstore.Domain.ReferenceData;
 using Bookstore.Web.Helpers;
 using Owin;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bookstore.Web
 {
