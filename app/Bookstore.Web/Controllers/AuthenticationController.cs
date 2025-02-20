@@ -37,12 +37,16 @@ namespace Bookstore.Web.Controllers
         {
             if (Request.Cookies[".AspNet.Cookies"] != null)
             {
-                Response.Cookies.Add(new HttpCookie(".AspNet.Cookies") { Expires = DateTime.Now.AddDays(-1) });
+                Response.Cookies.Delete(".AspNet.Cookies");
+                Response.Cookies.Append(".AspNet.Cookies", "", new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(-1)
+                });
             }
 
             var domain = BookstoreConfiguration.Get("Authentication/Cognito/CognitoDomain");
             var clientId = BookstoreConfiguration.Get("Authentication/Cognito/LocalClientId");
-            var logoutUri = $"{Request.Url.Scheme}://{Request.Url.Host}:{Request.Url.Port}/";
+            var logoutUri = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
 
             return Redirect($"{domain}/logout?client_id={clientId}&logout_uri={logoutUri}");
         }
