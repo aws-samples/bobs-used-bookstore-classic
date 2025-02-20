@@ -4,6 +4,7 @@ using Bookstore.Domain.Books;
 using Bookstore.Domain.Carts;
 using Bookstore.Web.ViewModel.Search;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Bookstore.Web.Controllers
