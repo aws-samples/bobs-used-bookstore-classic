@@ -2,9 +2,7 @@ using System;
 using System.Drawing;
 using System.Net;
 using Microsoft.AspNetCore.Owin;
-
 using Microsoft.AspNetCore.Http;
-
 
 namespace Bookstore.Web.Helpers
 {
@@ -20,17 +18,14 @@ namespace Bookstore.Web.Helpers
                 Path = "/"
             };
 
-            HttpCookie cookie = context.Request.Cookies[CookieKey];
-            string shoppingCartClientId = cookie != null ? cookie.Value : null;
-
-            //var shoppingCartClientId = context.Request.Cookies[CookieKey].Value;
+            string shoppingCartClientId = context.Request.Cookies[CookieKey];
 
             if (string.IsNullOrWhiteSpace(shoppingCartClientId))
             {
                 shoppingCartClientId = context.User.Identity.IsAuthenticated ? context.User.GetSub() : Guid.NewGuid().ToString();
             }
 
-            context.Response.Cookies.Add(new HttpCookie(CookieKey, shoppingCartClientId));
+            context.Response.Cookies.Append(CookieKey, shoppingCartClientId, cookieOptions);
 
             return shoppingCartClientId;
         }
