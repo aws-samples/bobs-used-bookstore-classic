@@ -1,10 +1,10 @@
-﻿@model Bookstore.Web.Areas.Admin.Models.Inventory.InventoryIndexViewModel
+@model Bookstore.Web.Areas.Admin.Models.Inventory.InventoryIndexViewModel
 
 @{
     ViewData["Title"] = "Inventory";
 }
 
-@Html.Partial("_MessageBanner")
+@{Html.RenderPartial("_MessageBanner");}
 
 <div class="d-flex m-3">
     <h5 class="me-auto">Inventory</h5>
@@ -67,7 +67,7 @@
 <div class="card m-3">
     <div class="card-header">
         <div class="d-flex justify-content-end">
-            @Html.Partial("_Paginator")
+            @{Html.RenderPartial("_Paginator");}
         </div>
     </div>
 
@@ -116,7 +116,7 @@
 
     <div class="card-footer">
         <div class="d-flex justify-content-end">
-            @Html.Partial("_Paginator")
+            @{Html.RenderPartial("_Paginator");}
         </div>
     </div>
 </div>

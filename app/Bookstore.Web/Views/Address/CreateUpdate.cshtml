@@ -1,4 +1,4 @@
-﻿@model Bookstore.Web.ViewModel.Address.AddressCreateUpdateViewModel
+@model Bookstore.Web.ViewModel.Address.AddressCreateUpdateViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -54,7 +54,5 @@
 </div>
 
 @section Scripts {
-    @{
-        Html.RenderPartial("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

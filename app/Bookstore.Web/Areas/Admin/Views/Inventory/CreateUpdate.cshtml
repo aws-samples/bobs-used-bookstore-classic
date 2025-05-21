@@ -1,4 +1,4 @@
-﻿@using Bookstore.Domain.ReferenceData
+@using Bookstore.Domain.ReferenceData
 
 @model Bookstore.Web.Areas.Admin.Models.Inventory.InventoryCreateUpdateViewModel
 
@@ -41,7 +41,7 @@
                 <div class="col">
                     <label class="form-label" for="QuantityInput">Quantity</label>
                     @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @id = "QuantityInput", placeholder = "Quantity", @type = "number" })
-                    <small>@Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })</small>
+                    <small>@Html.ValidationMessageFor(x => x.Quantity, null, new { @class = "text-danger" })</small>
                 </div>
             </div>
 
@@ -101,7 +101,7 @@
 
                 <label class="form-label">Cover Image</label>                               
                 @Html.TextBoxFor(a => a.CoverImage, new { @class = "form-control mb-3", type = "file", accept = ".png,.jpg,.jpeg" })
-                @Html.ValidationMessageFor(a => a.CoverImage, null, new { @class="text=danger" })
+                @Html.ValidationMessageFor(a => a.CoverImage, null, new { @class="text-danger" })
                 
                 <img src="@Model.CoverImageUrl" class="img-thumbnail @(string.IsNullOrWhiteSpace(Model.CoverImageUrl) ? "d-none" : "")" />
             </div>
@@ -138,5 +138,5 @@
         }
     </script>
 
-    @{Html.RenderPartial("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

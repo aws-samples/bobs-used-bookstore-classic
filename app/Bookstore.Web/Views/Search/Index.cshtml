@@ -1,10 +1,10 @@
-﻿@model Bookstore.Web.ViewModel.Search.SearchIndexViewModel
+@model Bookstore.Web.ViewModel.Search.SearchIndexViewModel
 @{
     ViewData["Title"] = "Search for books";
 }
 
 <div class="panel-body">
-    @Html.Partial("_Notification")
+    @await Html.PartialAsync("_Notification")
 
     <h2 class="mb-3">Search for Books</h2>
 
@@ -74,7 +74,7 @@
                 </div>
 
                 <div>
-                    @Html.Partial("_Paginator")
+                    @await Html.PartialAsync("_Paginator")
                 </div>
             </div>
         </section>

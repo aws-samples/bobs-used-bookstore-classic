@@ -1,14 +1,18 @@
-﻿using System.Web;
-using System.Web.Mvc;
 using System.Web.Optimization;
-using System.Web.Routing;
 using NLog;
+using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Routing;
+
+using Microsoft.AspNetCore.Http;
+
+using System.Threading.Tasks;
+
 
 namespace Bookstore.Web
 {
-    public class MvcApplication : HttpApplication
-    {
-        protected void Application_Start()
+    public class MvcApplication     {
+RequestDelegate _next = null;        protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -23,5 +27,5 @@ namespace Bookstore.Web
 
             logger.Error(ex);
         }
-    }
+publicMvcApplication(RequestDelegatenext){}    }
 }
