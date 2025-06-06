@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Bookstore.Web.Helpers;
 using Bookstore.Domain.Customers;
 using Bookstore.Domain.Carts;
 using Bookstore.Web.ViewModel.ShoppingCart;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
+
 
 namespace Bookstore.Web.Controllers
 {

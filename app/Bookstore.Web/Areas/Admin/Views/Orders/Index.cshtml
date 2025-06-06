@@ -1,4 +1,4 @@
-﻿@using Bookstore.Domain.Orders;
+@using Bookstore.Domain.Orders;
 @using Bookstore.Web.Helpers;
 
 @model Bookstore.Web.Areas.Admin.Models.Orders.OrderIndexViewModel
@@ -14,7 +14,8 @@
         <form class="row row-cols-lg-auto g-3 align-items-center" method="get">
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Reference data type</label>
-                @Html.EnumDropDownListFor(a => a.Filters.OrderStatusFilter, "All Order Statuses", new { @class = "form-select" })
+                @* TODO: Html.EnumDropDownListFor() is not supported in ASP.NET Core. Instead, use the Html.DropDownListFor() method. *@
+                @* @Html.EnumDropDownListFor(a => a.Filters.OrderStatusFilter, "All Order Statuses", new { @class = "form-select" }) *@
             </div>
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Order date from</label>
@@ -40,7 +41,7 @@
 <div class="card m-3">
     <div class="card-header">
         <div class="d-flex justify-content-end">
-            @Html.Partial("_Paginator")
+            @await Html.PartialAsync("_Paginator")
         </div>
     </div>
 
@@ -76,7 +77,7 @@
 
     <div class="card-footer">
         <div class="d-flex justify-content-end">
-            @Html.Partial("_Paginator")
+            @await Html.PartialAsync("_Paginator")
         </div>
     </div>
 </div>
