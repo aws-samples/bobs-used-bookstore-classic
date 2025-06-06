@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Bookstore.Web</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Bookstore.Common/Bookstore.Common.csproj" />
