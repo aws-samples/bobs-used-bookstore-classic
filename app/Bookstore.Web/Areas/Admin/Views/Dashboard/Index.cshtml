@@ -1,6 +1,7 @@
-﻿@using Bookstore.Domain;
+@using Bookstore.Domain;
 @using Bookstore.Domain.Offers;
 @using Bookstore.Domain.Orders
+@using Microsoft.AspNetCore.Routing
 @model Bookstore.Web.Areas.Admin.Models.Dashboard.DashboardIndexViewModel
 
 @{
@@ -19,7 +20,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between">@(Model.PendingOrders == 1 ? "There is 1 pending order" : $"There are {Model.PendingOrders} pending orders") @Html.ActionLink("View", "Index", new RouteValueDictionary { { "controller", "Orders" }, { "Filters.OrderStatusfilter", (int)OrderStatus.Pending } }) </li>
                 <li class="list-group-item d-flex justify-content-between">@(Model.PastDueOrders == 1 ? "There is 1 past-due order" : $"There are {Model.PastDueOrders} past-due orders") @Html.ActionLink("View", "Index", "Orders") </li>
-                <li class="list-group-item d-flex justify-content-between">@(Model.OrdersThisMonth == 1 ? "There has been 1 order placed this month" : $"There have been {Model.OrdersThisMonth} orders placed this month") @Html.ActionLink("View", "Index", new RouteValueDictionary { { "controller", "Orders" }, { "Filters.OrderDateFromFilter", @DateTime.UtcNow.StartOfMonth().ToString("yyyy-MM-dd") } })</li>
+                <li class="list-group-item d-flex justify-content-between">@(Model.OrdersThisMonth == 1 ? "There has been 1 order placed this month" : $"There have been {Model.OrdersThisMonth} orders placed this month") @Html.ActionLink("View", "Index", new RouteValueDictionary { { "controller", "Orders" }, { "Filters.OrderDateFromFilter", DateTime.UtcNow.StartOfMonth().ToString("yyyy-MM-dd") } })</li>
                 <li class="list-group-item d-flex justify-content-between">@(Model.OrdersTotal == 1 ? "There has been 1 order placed in total" : $"There have been {Model.OrdersTotal} orders placed in total") @Html.ActionLink("View", "Index", "Orders") </li>
             </ul>
         </div>
@@ -31,7 +32,7 @@
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between">@(Model.PendingOffers == 1 ? "There is 1 pending offer" : $"There are {Model.PendingOffers} pending offers") @Html.ActionLink("View", "Index", new RouteValueDictionary { { "controller", "Offers" }, { "Filters.OfferStatus", (int)OfferStatus.PendingApproval } })</li>
-                <li class="list-group-item d-flex justify-content-between">@(Model.OffersThisMonth == 1 ? "There has been 1 offer made this month" : $"There have been {Model.OffersThisMonth} offers made this month") @Html.ActionLink("View", "Index", new RouteValueDictionary { { "controller", "Offers" }, { "Filters.OfferDateFromfilter", @DateTime.UtcNow.StartOfMonth().ToString("yyyy-MM-dd") } })</li>
+                <li class="list-group-item d-flex justify-content-between">@(Model.OffersThisMonth == 1 ? "There has been 1 offer made this month" : $"There have been {Model.OffersThisMonth} offers made this month") @Html.ActionLink("View", "Index", new RouteValueDictionary { { "controller", "Offers" }, { "Filters.OfferDateFromfilter", DateTime.UtcNow.StartOfMonth().ToString("yyyy-MM-dd") } })</li>
                 <li class="list-group-item d-flex justify-content-between">@(Model.OffersTotal == 1 ? "There has been 1 offer made in total" : $"There have been {Model.OffersTotal} offers made in total")  @Html.ActionLink("View", "Index", new { controller = "Offers" })</li>
             </ul>
         </div>
