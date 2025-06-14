@@ -2,6 +2,7 @@
 
 ## Overview
 Bob's Used Books Classic is a backport of the [Bob's Used Books Sample Application](https://github.com/aws-samples/bobs-used-bookstore-sample). Bob's Used Books Classic is an ASP.NET MVC application that targets .NET Framework 4.8.
+Note: The project has been migrated from .Net 4.8 to .Net 8 through AWS Transform and can now be deployed directly in Linux environments.
 
 ## Prerequisites
 To run and debug the application locally you need the following:
