@@ -49,7 +49,7 @@ main()
 
         # Configuration variables
         IDENTITY_STORE_ID="d-xxxxxxxxxx"
-        USERNAME="workshop.user"
+        USERNAME="workshop-user"
         GIVEN_NAME="workshop"
         FAMILY_NAME="user"
         EMAIL="workshop.user@example.com"
