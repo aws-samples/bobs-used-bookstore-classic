@@ -53,7 +53,7 @@ main()
         GIVEN_NAME="workshop"
         FAMILY_NAME="user"
         EMAIL="workshop.user@example.com"
-        DISPLAY_NAME="John Doe"
+        DISPLAY_NAME="Workshop User"
 
         echo "=== AWS Identity Center User Creation Script ==="
 
