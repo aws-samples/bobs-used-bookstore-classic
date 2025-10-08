@@ -100,16 +100,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.Rekognition">
-      <Version>3.7.400.129</Version>
+      <Version>4.0.2.6</Version>
     </PackageReference>
     <PackageReference Include="AWSSDK.S3">
-      <Version>3.7.416.5</Version>
+      <Version>4.0.7.7</Version>
     </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.5.1</Version>
     </PackageReference>
     <PackageReference Include="Magick.NET-Q8-AnyCPU">
-      <Version>14.6.0</Version>
+      <Version>14.8.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
