@@ -1,9 +1,12 @@
-﻿using Bookstore.Domain.Addresses;
+using Bookstore.Domain.Addresses;
 using Bookstore.Domain.Customers;
 using Bookstore.Web.Helpers;
 using Bookstore.Web.ViewModel.Address;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
 
 namespace Bookstore.Web.Controllers
 {
