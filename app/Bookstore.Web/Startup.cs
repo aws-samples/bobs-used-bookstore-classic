@@ -1,21 +1,20 @@
-﻿using Microsoft.Owin;
-using Owin;
+using Microsoft.AspNetCore.Owin;
+using Microsoft.Extensions.DependencyInjection;
 
-[assembly: OwinStartup(typeof(Bookstore.Web.Startup))]
 
 namespace Bookstore.Web
 {
     public class Startup
     {
-        public void Configuration(IAppBuilder app)
+        public void ConfigureServices(IServiceCollection services)
         {
-            LoggingSetup.ConfigureLogging();
+            // LoggingSetup.ConfigureLogging();
 
-            ConfigurationSetup.ConfigureConfiguration();
+            // ConfigurationSetup.ConfigureConfiguration();
 
-            DependencyInjectionSetup.ConfigureDependencyInjection(app);
+            // DependencyInjectionSetup.ConfigureDependencyInjection(services);
 
-            AuthenticationConfig.ConfigureAuthentication(app);
+
         }
     }
 }
