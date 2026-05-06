@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using Bookstore.Domain.Books;
+using Microsoft.AspNetCore.Http;
 using Bookstore.Domain.ReferenceData;
 using Bookstore.Web.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace Bookstore.Web.Areas.Admin.Models.Inventory
 {
@@ -50,7 +53,7 @@ namespace Bookstore.Web.Areas.Admin.Models.Inventory
         public string ISBN { get; set; }
 
         public IEnumerable<SelectListItem> Publishers { get; set; } = new List<SelectListItem>();
-        
+
         [Required]
         [DisplayName("Publisher")]
         public int SelectedPublisherId { get; set; }
@@ -62,13 +65,13 @@ namespace Bookstore.Web.Areas.Admin.Models.Inventory
         public int SelectedBookTypeId { get; set; }
 
         public IEnumerable<SelectListItem> Genres { get; set; } = new List<SelectListItem>();
-       
+
         [Required]
         [DisplayName("Genre")]
         public int SelectedGenreId { get; set; }
 
         public IEnumerable<SelectListItem> BookConditions { get; set; } = new List<SelectListItem>();
-        
+
         [Required]
         [DisplayName("Condition")]
         public int SelectedConditionId { get; set; }
@@ -82,8 +85,8 @@ namespace Bookstore.Web.Areas.Admin.Models.Inventory
         [MaxFileSize(2*1024*1024)]
         [ImageTypes(new string[] {".png", ".jpg", ".jpeg"})]
         [DisplayName("Cover image")]
-        public HttpPostedFileBase CoverImage { get; set; }
-        
+        public IFormFile CoverImage { get; set; }
+
         public string CoverImageUrl { get; set; }
 
         public string Summary { get; set; }
