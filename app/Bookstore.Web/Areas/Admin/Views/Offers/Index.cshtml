@@ -1,5 +1,6 @@
-﻿@using Bookstore.Domain.Offers;
+@using Bookstore.Domain.Offers;
 @using Bookstore.Domain;
+@using Microsoft.AspNetCore.Mvc.Rendering;
 
 @model Bookstore.Web.Areas.Admin.Models.Offers.OfferIndexViewModel
 
@@ -36,7 +37,7 @@
 
             <div class="col-12">
                 <label class="visually-hidden" for="OfferStatusSelect">Offer status</label>
-                @Html.EnumDropDownListFor(a => a.Filters.OfferStatus, "All Offer Statuses", new { @class = "form-select" })
+                @Html.DropDownListFor(a => a.Filters.OfferStatus, Html.GetEnumSelectList<OfferStatus>(), "All Offer Statuses", new { @class = "form-select" })
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Filter</button>

@@ -14,7 +14,7 @@ namespace Bookstore.Data.ImageResizeService
         {
             using (var magickImage = new MagickImage(image))
             {
-                if (magickImage.BaseWidth == BookCoverImageWidth && magickImage.BaseHeight == BookCoverImageHeight) return image;
+                if (magickImage.Width == BookCoverImageWidth && magickImage.Height == BookCoverImageHeight) return image;
 
                 var size = new MagickGeometry(BookCoverImageWidth, BookCoverImageHeight) { IgnoreAspectRatio = false };
 

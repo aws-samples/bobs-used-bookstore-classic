@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using Bookstore.Domain.Addresses;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.Carts;
@@ -13,7 +14,10 @@ namespace Bookstore.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(string connectionString) : base(connectionString) { }
+        public ApplicationDbContext(string connectionString) : base(connectionString)
+        {
+            Database.SetInitializer(new BookstoreDbInitializer());
+        }
 
         public DbSet<Address> Address { get; set; }
 
@@ -36,9 +40,10 @@ namespace Bookstore.Data
             // Update to remove the pluralization to match the modern version
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-
-            modelBuilder.Entity<Customer>().Property(x => x.Sub).HasColumnType("nvarchar").HasMaxLength(450);
-            modelBuilder.Entity<Customer>().HasIndex(x => x.Sub).IsUnique();
+            modelBuilder.Entity<Customer>().Property(x => x.Sub).HasColumnType("nvarchar").HasMaxLength(450)
+                .HasColumnAnnotation(
+                    "Index",
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
             modelBuilder.Entity<Book>().HasRequired(x => x.Publisher).WithMany().HasForeignKey(x => x.PublisherId).WillCascadeOnDelete(false);
             modelBuilder.Entity<Book>().HasRequired(x => x.BookType).WithMany().HasForeignKey(x => x.BookTypeId).WillCascadeOnDelete(false);
@@ -57,8 +62,6 @@ namespace Bookstore.Data
 
             modelBuilder.Entity<ShoppingCartItem>().HasKey(x => new { x.Id, x.ShoppingCartId });
             modelBuilder.Entity<ShoppingCartItem>().Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            Database.SetInitializer(new BookstoreDbInitializer());
         }
     }
 }

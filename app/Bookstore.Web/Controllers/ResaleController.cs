@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Bookstore.Web.ViewModel.Resale;
 using Bookstore.Web.Helpers;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.ReferenceData;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bookstore.Web.Controllers
 {
