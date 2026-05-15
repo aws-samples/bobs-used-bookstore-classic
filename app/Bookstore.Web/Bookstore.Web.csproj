@@ -699,16 +699,7 @@
       <Name>Bookstore.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\AWSSDK.CloudWatchLogs.4.0.8.4\analyzers\dotnet\cs\AWSSDK.CloudWatchLogs.CodeAnalysis.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.CloudWatchLogs.4.0.8.4\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.Rekognition.4.0.2.6\analyzers\dotnet\cs\AWSSDK.Rekognition.CodeAnalysis.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.Rekognition.4.0.2.6\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.S3.4.0.7.7\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.S3.4.0.7.7\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.SimpleSystemsManagement.4.0.4.3\analyzers\dotnet\cs\AWSSDK.SimpleSystemsManagement.CodeAnalysis.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.SimpleSystemsManagement.4.0.4.3\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
-  </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
