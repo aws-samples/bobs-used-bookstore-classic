@@ -2,28 +2,29 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-main()
-{
+main() {
     STACK_OPERATION=$1
 
     if [[ "$STACK_OPERATION" == "create" || "$STACK_OPERATION" == "update" ]]; then
         echo "=== Enabling AWS IAM Identity Center ==="
+
         # Check if AWS CLI is configured
         if ! aws sts get-caller-identity &>/dev/null; then
             echo "Error: AWS CLI is not configured or you don't have proper permissions"
             exit 1
         fi
-
         echo "✓ AWS CLI is configured"
 
-        if aws sso-admin create-instance --name "Default" 2>/dev/null; then
+        if aws sso-admin list-instances --query 'Instances[0].InstanceArn' --output text 2>/dev/null | grep -q "arn:aws:sso"; then
+            echo "✓ IAM Identity Center already enabled, skipping creation"
+        elif aws sso-admin create-instance --name "Default" 2>/dev/null; then
             echo "✓ IAM Identity Center enabled successfully via Organizations"
             sleep 10  # Wait for service to initialize
         else
             echo "Failed to enable via Organizations API"
             exit 1
         fi
-        
+
         # Wait for Identity Center to become available
         echo "Waiting for Identity Center to initialize..."
         for i in {1..12}; do
@@ -38,7 +39,7 @@ main()
             echo "Waiting... (attempt $i/12)"
             sleep 10
         done
-        
+
         # Check if enablement failed
         if ! aws sso-admin list-instances --query 'Instances[0].InstanceArn' --output text 2>/dev/null | grep -q "arn:aws:sso"; then
             echo "❌ Automatic enablement failed."
@@ -46,7 +47,6 @@ main()
         fi
 
         # AWS CLI script to create a user in AWS IAM Identity Center
-
         # Configuration variables
         IDENTITY_STORE_ID="d-xxxxxxxxxx"
         USERNAME="workshop-user"
@@ -72,25 +72,36 @@ main()
             exit 1
         fi
 
-        # Create the user
+        # Create the user (skip if already exists)
         echo "Creating user: $USERNAME"
-        USER_ID=$(aws identitystore create-user \
+        EXISTING_USER_ID=$(aws identitystore list-users \
             --identity-store-id "$IDENTITY_STORE_ID" \
-            --user-name "$USERNAME" \
-            --name GivenName="$GIVEN_NAME",FamilyName="$FAMILY_NAME" \
-            --display-name "$DISPLAY_NAME" \
-            --emails Value="$EMAIL",Type="work",Primary=true \
-            --query 'UserId' \
-            --output text)
-        
-        if [ $? -eq 0 ]; then
-            echo "User created successfully!"
-            echo "User ID: $USER_ID"
-            echo "Username: $USERNAME"
-            echo "Email: $EMAIL"
+            --filters AttributePath="UserName",AttributeValue="$USERNAME" \
+            --query 'Users[0].UserId' \
+            --output text 2>/dev/null)
+
+        if [ -n "$EXISTING_USER_ID" ] && [ "$EXISTING_USER_ID" != "None" ]; then
+            echo "✓ User $USERNAME already exists (ID: $EXISTING_USER_ID), skipping creation"
+            USER_ID="$EXISTING_USER_ID"
         else
-            echo "Failed to create user"
-            exit 1
+            USER_ID=$(aws identitystore create-user \
+                --identity-store-id "$IDENTITY_STORE_ID" \
+                --user-name "$USERNAME" \
+                --name GivenName="$GIVEN_NAME",FamilyName="$FAMILY_NAME" \
+                --display-name "$DISPLAY_NAME" \
+                --emails Value="$EMAIL",Type="work",Primary=true \
+                --query 'UserId' \
+                --output text)
+
+            if [ $? -eq 0 ]; then
+                echo "User created successfully!"
+                echo "User ID: $USER_ID"
+                echo "Username: $USERNAME"
+                echo "Email: $EMAIL"
+            else
+                echo "Failed to create user"
+                exit 1
+            fi
         fi
 
         # Verify creation
@@ -101,7 +112,7 @@ main()
             --output table
 
         echo "=== Script completed ==="
-        
+
     elif [ "$STACK_OPERATION" == "delete" ]; then
         echo "Done cdk destroy!"
     else
